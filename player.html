@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎧 Аудио — МФК Олимпийский</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; text-align: center; padding: 20px; background: #f9f9fb; }
+    h1 { color: #2c3e50; margin-bottom: 20px; }
+    .player { max-width: 600px; margin: 0 auto; }
+    audio { width: 100%; }
+    .back { display: inline-block; margin-top: 20px; color: #3498db; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <h1>🎧 Аудиоматериал</h1>
+  <div class="player">
+    <audio id="audio" controls>
+      Ваш браузер не поддерживает аудио.
+    </audio>
+    <br>
+    <a href="javascript:history.back()" class="back">← Назад</a>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const fileId = urlParams.get('id');
+
+    if (!fileId) {
+      alert('❌ Не указан ID аудиофайла.');
+      document.getElementById('audio').style.display = 'none';
+    } else {
+      const audioUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+      document.getElementById('audio').src = audioUrl;
+    }
+  </script>
+</body>
+</html>
