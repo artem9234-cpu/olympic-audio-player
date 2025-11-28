@@ -5,20 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🎧 Аудиоматериал — МФК Олимпийский</title>
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; text-align: center; padding: 20px; background: #f9f9fb; margin: 0; }
-    h1 { color: #2c3e50; }
-    .player-box { background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin: 20px auto; max-width: 600px; }
+    body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; text-align: center; padding: 30px; background: #f9f9fb; margin: 0; }
+    h1 { color: #2c3e50; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+    .container { max-width: 600px; margin: 0 auto; }
+    .player-box { background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 20px; }
     .audio-player { width: 100%; }
-    .note { color: #7f8c8d; font-size: 0.9em; margin-top: 10px; }
+    .note { color: #7f8c8d; font-size: 0.9em; margin-top: 10px; line-height: 1.4; }
+    .back { display: inline-block; margin-top: 15px; color: #3498db; text-decoration: none; font-weight: 500; }
+    .back:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
-  <h1>🎧 Аудиоматериал</h1>
-  <div class="player-box">
-    <audio class="audio-player" controls src="https://drive.google.com/uc?export=download&id=1Mb3hTbDv2Y3lT3JXdA5UvRkXr9zdl3yA">
-      Ваш браузер не поддерживает аудио.
-    </audio>
-    <div class="note">💡 Первый запуск может занять 10–20 секунд (файл 677 МБ)</div>
+  <div class="container">
+    <header>
+      <h1>🎧 Аудиоматериал</h1>
+    </header>
+
+    <div class="player-box">
+      <audio controls preload="metadata">
+        <source src="https://drive.google.com/uc?export=download&id=1Mb3hTbDv2Y3lT3JXdA5UvRkXr9zdl3yA" type="audio/mpeg">
+        Ваш браузер не поддерживает аудио.
+      </audio>
+      <div class="note">
+        ⏳ Первый запуск может занять 30–60 секунд (файл 677 МБ)<br>
+        💡 Если плеер не работает — скачайте файл и откройте в VLC или Windows Media Player.
+      </div>
+    </div>
+
+    <a href="javascript:history.back()" class="back">← Назад</a>
   </div>
 </body>
 </html>
