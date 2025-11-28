@@ -3,22 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🎧 Аудио — МФК Олимпийский</title>
+  <title>🎧 Аудиоматериал — МФК Олимпийский</title>
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; text-align: center; padding: 20px; background: #f9f9fb; }
-    h1 { color: #2c3e50; margin-bottom: 20px; }
-    .player { max-width: 600px; margin: 0 auto; }
-    audio { width: 100%; }
-    .back { display: inline-block; margin-top: 20px; color: #3498db; text-decoration: none; }
+    body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; text-align: center; padding: 20px; background: #f9f9fb; margin: 0; }
+    header { margin-bottom: 20px; }
+    h1 { color: #2c3e50; margin: 0; display: flex; align-items: center; justify-content: center; gap: 10px; }
+    .subtitle { color: #7f8c8d; font-size: 0.9em; margin-top: 4px; }
+    .container { max-width: 700px; margin: 0 auto; }
+    .player-box { background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 20px; }
+    .iframe-player { width: 100%; height: 600px; border: none; border-radius: 8px; }
+    .error { color: #e74c3c; font-weight: bold; padding: 10px; background: #fdf2f2; border-radius: 6px; }
+    .back { display: inline-block; margin-top: 15px; color: #3498db; text-decoration: none; font-weight: 500; }
+    .back:hover { text-decoration: underline; }
+    @media (max-width: 600px) {
+      .iframe-player { height: 400px; }
+    }
   </style>
 </head>
 <body>
-  <h1>🎧 Аудиоматериал</h1>
-  <div class="player">
-    <audio id="audio" controls>
-      Ваш браузер не поддерживает аудио.
-    </audio>
-    <br>
+  <div class="container">
+    <header>
+      <h1>🎧 Аудиоматериал</h1>
+    </header>
+
+    <div class="player-box">
+      <div id="error" class="error" style="display: none;"></div>
+      <iframe id="iframePlayer" class="iframe-player" allow="autoplay"></iframe>
+    </div>
+
     <a href="javascript:history.back()" class="back">← Назад</a>
   </div>
 
@@ -27,11 +39,17 @@
     const fileId = urlParams.get('id');
 
     if (!fileId) {
-      alert('❌ Не указан ID аудиофайла.');
-      document.getElementById('audio').style.display = 'none';
+      showError('❌ Не указан ID файла.');
     } else {
-      const audioUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
-      document.getElementById('audio').src = audioUrl;
+      // Используем Google Drive preview — работает для любого типа файла
+      const iframeSrc = `https://drive.google.com/file/d/${fileId}/preview`;
+      document.getElementById('iframePlayer').src = iframeSrc;
+    }
+
+    function showError(msg) {
+      const el = document.getElementById('error');
+      el.textContent = msg;
+      el.style.display = 'block';
     }
   </script>
 </body>
