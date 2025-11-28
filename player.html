@@ -6,56 +6,19 @@
   <title>🎧 Аудиоматериал — МФК Олимпийский</title>
   <style>
     body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; text-align: center; padding: 20px; background: #f9f9fb; margin: 0; }
-    header { margin-bottom: 20px; }
-    h1 { color: #2c3e50; margin: 0; display: flex; align-items: center; justify-content: center; gap: 10px; }
-    .subtitle { color: #7f8c8d; font-size: 0.9em; margin-top: 4px; }
-    .container { max-width: 700px; margin: 0 auto; }
-    .player-box { background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 20px; }
+    h1 { color: #2c3e50; }
+    .player-box { background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin: 20px auto; max-width: 600px; }
     .audio-player { width: 100%; }
-    .error { color: #e74c3c; font-weight: bold; padding: 10px; background: #fdf2f2; border-radius: 6px; }
-    .back { display: inline-block; margin-top: 15px; color: #3498db; text-decoration: none; font-weight: 500; }
-    .back:hover { text-decoration: underline; }
+    .note { color: #7f8c8d; font-size: 0.9em; margin-top: 10px; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>🎧 Аудиоматериал</h1>
-    </header>
-
-    <div class="player-box">
-      <div id="error" class="error" style="display: none;"></div>
-      <audio id="audio" class="audio-player" controls>
-        Ваш браузер не поддерживает аудио.
-      </audio>
-    </div>
-
-    <a href="javascript:history.back()" class="back">← Назад</a>
+  <h1>🎧 Аудиоматериал</h1>
+  <div class="player-box">
+    <audio class="audio-player" controls src="https://drive.google.com/uc?export=download&id=1Mb3hTbDv2Y3lT3JXdA5UvRkXr9zdl3yA">
+      Ваш браузер не поддерживает аудио.
+    </audio>
+    <div class="note">💡 Первый запуск может занять 10–20 секунд (файл 677 МБ)</div>
   </div>
-
-  <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const fileId = urlParams.get('id');
-
-    if (!fileId) {
-      showError('❌ Не указан ID аудиофайла.');
-    } else {
-      // Прямая ссылка на скачивание (работает для MP3)
-      const audioUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
-      const audio = document.getElementById('audio');
-      audio.src = audioUrl;
-
-      // Обработка ошибок загрузки
-      audio.addEventListener('error', () => {
-        showError('❌ Не удалось загрузить аудио. Проверьте доступ к файлу.');
-      });
-    }
-
-    function showError(msg) {
-      const el = document.getElementById('error');
-      el.textContent = msg;
-      el.style.display = 'block';
-    }
-  </script>
 </body>
 </html>
